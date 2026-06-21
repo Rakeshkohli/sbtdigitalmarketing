@@ -1,86 +1,149 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import './OurServices.css';
 
 const services = [
-  { id: 1, title: 'Lead Generation', img: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800', desc: 'Attract and convert your ideal customers into high-quality leads.' },
-  { id: 2, title: 'Google Ads', img: 'https://images.unsplash.com/photo-1542744094-24638ea0b3b5?auto=format&fit=crop&q=80&w=800', desc: 'High ROI PPC campaigns targeting users with intent to buy.' },
-  { id: 3, title: 'SEO Optimization', img: 'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?auto=format&fit=crop&q=80&w=800', desc: 'Rank higher on Google and drive organic, sustainable traffic.' },
-  { id: 4, title: 'Social Media', img: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800', desc: 'Build brand loyalty and engage audiences on Meta, IG, LinkedIn.' },
-  { id: 5, title: 'Web Development', img: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800', desc: 'Modern, fast, and high-converting websites.' },
-  { id: 6, title: 'Video Editing', img: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&q=80&w=800', desc: 'Captivating visual stories that boost engagement.' },
+  {
+    id: 1,
+    title: 'LEAD GENERATION',
+    subtitle: '( turning clicks into clients )',
+    desc: 'We craft data-driven campaigns that attract and convert your ideal customers into high-quality leads, building a reliable pipeline for consistent business growth and long-term success.',
+    img: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 2,
+    title: 'GOOGLE ADS',
+    subtitle: '( every rupee optimized )',
+    desc: 'High ROI PPC campaigns precisely targeting users with intent to buy. Every rupee of your budget is optimized for maximum conversion, delivering measurable returns at scale.',
+    img: 'https://images.unsplash.com/photo-1542744094-24638ea0b3b5?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 3,
+    title: 'SEO',
+    subtitle: '( organic growth engine )',
+    desc: 'Rank higher on Google and drive organic, sustainable traffic to your website. We build authority through technical excellence, strategic content, and proven optimization techniques.',
+    img: 'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 4,
+    title: 'SOCIAL MEDIA',
+    subtitle: '( building real communities )',
+    desc: 'Build brand loyalty and engage your audience on Meta, Instagram, and LinkedIn. We create content strategies that resonate, grow your following, and convert followers into customers.',
+    img: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 5,
+    title: 'WEB DEV',
+    subtitle: '( built for performance )',
+    desc: 'Modern, fast, and high-converting websites built for performance and user experience — your digital storefront designed to impress, convert, and scale with your business.',
+    img: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800',
+  },
+  {
+    id: 6,
+    title: 'VIDEO',
+    subtitle: '( stories that sell )',
+    desc: 'Captivating visual stories that boost engagement and stop the scroll. From reels to brand films, we craft videos that leave a lasting impression and drive action.',
+    img: 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&q=80&w=800',
+  },
 ];
 
-const OurServices = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+const ServiceRow = ({ service, isOpen, onToggle }) => {
+  const rowRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: rowRef,
+    offset: ['start end', 'end start'],
+  });
+  const titleX = useTransform(scrollYProgress, [0, 1], ['4%', '-2%']);
 
   return (
-    <section className="section" ref={ref} style={{ position: 'relative', overflow: 'hidden' }}>
-      <div className="container">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
-          <div>
-            <h2 className="section-title" style={{ textAlign: 'left', marginBottom: '0.5rem' }}>Our Services</h2>
-            <p className="section-subtitle" style={{ textAlign: 'left', margin: '0' }}>Comprehensive solutions to scale your brand.</p>
-          </div>
-          <Link to="/services" className="btn btn-secondary">
-            View All Services <ArrowRight size={18} />
-          </Link>
-        </div>
-
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '2rem'
-        }}>
-          {services.map((service, index) => (
-            <motion.div
-              key={service.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ delay: index * 0.1, duration: 0.6 }}
-              className="service-card"
-              style={{
-                position: 'relative',
-                borderRadius: '1rem',
-                overflow: 'hidden',
-                aspectRatio: '4/3',
-                cursor: 'pointer'
-              }}
-            >
-              <img 
-                src={service.img} 
-                alt={service.title} 
-                style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }}
-                className="service-img"
-              />
-              <div style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-end',
-                padding: '2rem'
-              }}>
-                <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: '#fff' }}>{service.title}</h3>
-                <p style={{ color: '#ccc', fontSize: '0.9rem', marginBottom: '1rem', opacity: 0.8 }}>{service.desc}</p>
-                <Link to="/services" style={{ color: 'var(--primary)', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                  Learn More <ArrowRight size={16} />
+    <motion.div
+      ref={rowRef}
+      className={`os-row ${isOpen ? 'os-row--open' : ''}`}
+      onMouseEnter={() => onToggle(service.id)}
+      onMouseLeave={() => onToggle(null)}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.5 }}
+    >
+      {/* Expanded content — shows on hover */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="os-row-expanded"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
+            <div className="os-row-expanded-inner">
+              <div className="os-row-meta">
+                <span className="os-row-num">0{service.id}</span>
+                <p className="os-row-desc">{service.desc}</p>
+                <Link to="/services" className="os-row-link">
+                  Learn more <span className="os-row-link-arrow">↗</span>
                 </Link>
               </div>
-            </motion.div>
-          ))}
-        </div>
+              <div className="os-row-img-wrap">
+                <motion.img
+                  src={service.img}
+                  alt={service.title}
+                  className="os-row-img"
+                  initial={{ scale: 1.15, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 1.15, opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Big title row — always visible */}
+      <div className="os-row-title-wrap">
+        <Link to="/services" className="os-row-title-link">
+          <motion.h3 className="os-row-big-title" style={{ x: titleX }}>
+            {service.title}
+          </motion.h3>
+        </Link>
+        <span className="os-row-subtitle">{service.subtitle}</span>
       </div>
-      <style dangerouslySetInnerHTML={{__html: `
-        .service-card:hover .service-img {
-          transform: scale(1.1);
-        }
-      `}} />
+    </motion.div>
+  );
+};
+
+const OurServices = () => {
+  const [openId, setOpenId] = useState(null);
+  const sectionRef = useRef(null);
+
+  return (
+    <section className="os-section" ref={sectionRef}>
+      {/* Section Header */}
+      <div className="os-header">
+        <span className="os-header-label">Services</span>
+        <h2 className="os-header-heading">OUR SERVICES</h2>
+      </div>
+
+      {/* Service rows */}
+      <div className="os-rows">
+        {services.map((service) => (
+          <ServiceRow
+            key={service.id}
+            service={service}
+            isOpen={openId === service.id}
+            onToggle={setOpenId}
+          />
+        ))}
+      </div>
+
+      {/* CTA */}
+      <div className="os-footer">
+        <Link to="/services" className="os-footer-btn">
+          View All Services ↗
+        </Link>
+      </div>
     </section>
   );
 };
