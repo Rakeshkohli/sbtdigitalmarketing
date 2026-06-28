@@ -69,8 +69,13 @@
 }
 
 @keyframes spinBadge {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ── Scroller (stacking container) ── */
@@ -115,21 +120,27 @@
 .wwd-card--dark {
   background: #0d0d0d;
 }
+
 .wwd-card--dark .wwd-card-title {
   color: #ffffff;
 }
+
 .wwd-card--dark .wwd-card-number {
   color: #4ade80;
 }
+
 .wwd-card--dark .wwd-card-label {
   color: rgba(255, 255, 255, 0.4);
 }
+
 .wwd-card--dark .wwd-card-desc {
   color: rgba(255, 255, 255, 0.55);
 }
+
 .wwd-card--dark .wwd-card-link {
   color: #4ade80;
 }
+
 .wwd-card--dark .wwd-card-topbar {
   border-bottom-color: rgba(255, 255, 255, 0.08);
 }
@@ -138,21 +149,27 @@
 .wwd-card--accent {
   background: #0a1f12;
 }
+
 .wwd-card--accent .wwd-card-title {
   color: #4ade80;
 }
+
 .wwd-card--accent .wwd-card-number {
   color: #ffffff;
 }
+
 .wwd-card--accent .wwd-card-label {
   color: rgba(74, 222, 128, 0.4);
 }
+
 .wwd-card--accent .wwd-card-desc {
   color: rgba(255, 255, 255, 0.55);
 }
+
 .wwd-card--accent .wwd-card-link {
   color: #ffffff;
 }
+
 .wwd-card--accent .wwd-card-topbar {
   border-bottom-color: rgba(74, 222, 128, 0.1);
 }
@@ -161,21 +178,27 @@
 .wwd-card--light {
   background: #e8e8e3;
 }
+
 .wwd-card--light .wwd-card-title {
   color: #0a0a0a;
 }
+
 .wwd-card--light .wwd-card-number {
   color: #0d6832;
 }
+
 .wwd-card--light .wwd-card-label {
   color: rgba(10, 10, 10, 0.4);
 }
+
 .wwd-card--light .wwd-card-desc {
   color: rgba(10, 10, 10, 0.6);
 }
+
 .wwd-card--light .wwd-card-link {
   color: #0a0a0a;
 }
+
 .wwd-card--light .wwd-card-topbar {
   border-bottom-color: rgba(0, 0, 0, 0.08);
 }
@@ -189,7 +212,7 @@
   padding: 3rem 4rem;
   display: flex;
   flex-direction: column;
-  min-height: 80vh;
+  min-height: 70vh;
 }
 
 /* Top bar — number + label */
@@ -283,13 +306,16 @@
   .wwd-header {
     padding: 5rem 2.5rem 3.5rem;
   }
+
   .wwd-card-content {
     padding: 2.5rem 2.5rem;
   }
+
   .wwd-card-title {
     font-size: clamp(2.2rem, 5vw, 3.5rem);
     max-width: 55%;
   }
+
   .wwd-badge {
     width: 85px;
     height: 85px;
@@ -302,33 +328,40 @@
     flex-direction: column;
     gap: 1.5rem;
   }
+
   .wwd-badge {
     align-self: flex-end;
     width: 70px;
     height: 70px;
   }
+
   .wwd-card {
     min-height: auto;
     border-radius: 0.8rem 0.8rem 0 0;
   }
+
   .wwd-card-content {
     padding: 2.5rem 1.5rem;
     min-height: auto;
     padding-top: 2rem;
     padding-bottom: 4rem;
   }
+
   .wwd-card-body {
     flex-direction: column;
     align-items: flex-start;
     gap: 2rem;
   }
+
   .wwd-card-title {
     font-size: clamp(2rem, 9vw, 3rem);
     max-width: 100%;
   }
+
   .wwd-card-meta {
     max-width: 100%;
   }
+
   .wwd-heading {
     font-size: clamp(2.2rem, 8vw, 3.2rem);
   }
@@ -338,19 +371,24 @@
   .wwd-header {
     padding: 3rem 1.2rem 2.5rem;
   }
+
   .wwd-badge {
     width: 60px;
     height: 60px;
   }
+
   .wwd-badge-text {
     font-size: 6px;
   }
+
   .wwd-card-content {
     padding: 2rem 1.2rem 3rem;
   }
+
   .wwd-card-title {
     font-size: clamp(1.8rem, 10vw, 2.5rem);
   }
+
   .wwd-card-desc {
     font-size: 0.82rem;
   }

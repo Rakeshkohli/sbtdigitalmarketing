@@ -85,7 +85,7 @@
 }
 
 /* ── Theme Colors ── */
-/* Dark */
+/* Dark Theme */
 .os-card--dark .os-card-inner {
   background: #111111;
 }
@@ -93,6 +93,11 @@
 .os-card--dark .os-card-title-link,
 .os-card--dark .os-card-big-title {
   color: #ffffff;
+}
+
+.os-card--dark .os-card-desc {
+  color: rgba(255, 255, 255, 0.65);
+  /* ✨ Description color for Dark theme */
 }
 
 .os-card--dark .os-card-subtitle {
@@ -107,7 +112,7 @@
   border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
-/* Green — brand accent */
+/* Green Theme — brand accent */
 .os-card--green .os-card-inner {
   background: #0a1f12;
 }
@@ -118,6 +123,11 @@
 
 .os-card--green .os-card-big-title {
   color: #4ade80;
+}
+
+.os-card--green .os-card-desc {
+  color: rgba(255, 255, 255, 0.75);
+  /* ✨ Description color for Green theme */
 }
 
 .os-card--green .os-card-subtitle {
@@ -132,7 +142,7 @@
   border-bottom-color: rgba(74, 222, 128, 0.1);
 }
 
-/* Light */
+/* Light Theme */
 .os-card--light .os-card-inner {
   background: #e8e8e3;
 }
@@ -140,6 +150,11 @@
 .os-card--light .os-card-title-link,
 .os-card--light .os-card-big-title {
   color: #0a0a0a;
+}
+
+.os-card--light .os-card-desc {
+  color: rgba(10, 10, 10, 0.7);
+  /* ✨ Description color for Light theme */
 }
 
 .os-card--light .os-card-subtitle {
@@ -253,9 +268,19 @@
 .os-card-info {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.85rem;
   align-items: flex-start;
   flex-shrink: 0;
+}
+
+/* ✨ Description Main Styling */
+.os-card-desc {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 420px;
+  /* Limits paragraph width to look neat next to big title */
+  margin: 0 0 0.25rem 0;
 }
 
 .os-card-learn-link {
@@ -376,6 +401,12 @@
 
   .os-card-big-title {
     font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+
+  /* ✨ Responsive adjustment for description */
+  .os-card-desc {
+    max-width: 100%;
+    font-size: 0.9rem;
   }
 
   .os-card-subtitle {

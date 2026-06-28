@@ -185,6 +185,10 @@ const OurServices = () => {
                   <div className="os-card-bottom">
                     <h3 className="os-card-big-title">{service.title}</h3>
                     <div className="os-card-info">
+
+                      {/* ✨ यहाँ प्रत्येक कार्ड का Description रेंडर हो रहा है */}
+                      <p className="os-card-desc">{service.desc}</p>
+
                       <Link to="/services" className="os-card-learn-link">
                         {service.link}
                         <span className="os-card-learn-arrow">

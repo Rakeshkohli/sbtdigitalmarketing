@@ -70,13 +70,24 @@ const WhatWeDeliver = () => {
           });
 
           // Scale down + blur as next card scrolls over
+          // gsap.to(card, {
+          //   scale: 0.88,
+          //   filter: 'blur(4px) brightness(0.4)',
+          //   scrollTrigger: {
+          //     trigger: cards[i + 1],
+          //     start: 'top bottom',
+          //     end: 'top top',
+          //     scrub: true,
+          //   },
+          // });
+          // Scale down + blur as next card scrolls over
           gsap.to(card, {
             scale: 0.88,
             filter: 'blur(4px) brightness(0.4)',
             scrollTrigger: {
               trigger: cards[i + 1],
-              start: 'top bottom',
-              end: 'top top',
+              start: 'top 70%', // ✨ बदलाव: जब अगला card screen के 50% (center) पर पहुंचेगा, तब blur शुरू होगा
+              end: 'top 15%',   // ✨ बदलाव: जब अगला card top के करीब पहुंचेगा, तब तक blur पूरा होगा
               scrub: true,
             },
           });
