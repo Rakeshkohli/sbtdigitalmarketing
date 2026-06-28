@@ -11,90 +11,92 @@ const deliverables = [
     title: 'INCREASED ROI & SALES',
     desc: 'We focus on the metrics that matter. Our strategies are designed to maximize your return on investment and drive actual revenue growth for your business.',
     link: 'See our results',
-    theme: 'light',
+    linkHref: '#',
   },
   {
     number: '02',
     title: 'QUALIFIED LEADS',
     desc: 'Stop wasting money on unqualified clicks. We build targeted funnels that attract your ideal customers and convert them into solid, high-value leads.',
     link: 'How we do it',
-    theme: 'dark',
+    linkHref: '#',
   },
   {
     number: '03',
     title: 'POWERFUL BRAND PRESENCE',
     desc: 'Dominate your industry with a cohesive, professional online presence across search engines, social media, and your website — built for long-term dominance.',
     link: 'Our approach',
-    theme: 'accent',
+    linkHref: '#',
   },
   {
     number: '04',
     title: 'DATA-DRIVEN STRATEGY',
     desc: 'Every decision is backed by analytics and real data. We continuously optimize your campaigns based on performance metrics, ensuring consistent growth and efficiency.',
     link: 'View strategy',
-    theme: 'light',
+    linkHref: '#',
   },
   {
     number: '05',
     title: 'RELIABLE DELIVERY',
     desc: 'From the initial idea to the final launch, we focus on clear communication, thoughtful planning, and reliable delivery at every stage. Each project is tested and refined.',
     link: 'How we work',
-    theme: 'dark',
+    linkHref: '#',
   },
 ];
 
 const WhatWeDeliver = () => {
   const sectionRef = useRef(null);
-  const panelsContainerRef = useRef(null);
-  const panelRefs = useRef([]);
+  const scrollerRef = useRef(null);
+  const cardRefs = useRef([]);
+  const endRef = useRef(null);
 
   useLayoutEffect(() => {
-    const section = sectionRef.current;
-    const panelsContainer = panelsContainerRef.current;
-    const panels = panelRefs.current;
+    const scroller = scrollerRef.current;
+    const cards = cardRefs.current.filter(Boolean);
+    const endEl = endRef.current;
 
-    if (!section || !panelsContainer || panels.length === 0) return;
+    if (!scroller || cards.length === 0 || !endEl) return;
 
     const ctx = gsap.context(() => {
-      // Each panel gets pinned and stacks on top of the previous
-      panels.forEach((panel, i) => {
-        if (i === panels.length - 1) return; // last panel doesn't need pinning
+      cards.forEach((card, i) => {
+        // Pin every card except the last one
+        if (i < cards.length - 1) {
+          ScrollTrigger.create({
+            trigger: card,
+            start: 'top top',
+            endTrigger: endEl,
+            end: 'top bottom',
+            pin: true,
+            pinSpacing: false,
+          });
 
-        ScrollTrigger.create({
-          trigger: panel,
-          start: 'top top',
-          endTrigger: panelsContainer,
-          end: 'bottom bottom',
-          pin: true,
-          pinSpacing: false,
-        });
-
-        // Scale down the panel as the next one comes over it
-        gsap.to(panel, {
-          scale: 0.93,
-          opacity: 0.4,
-          filter: 'brightness(0.5)',
-          scrollTrigger: {
-            trigger: panels[i + 1],
-            start: 'top bottom',
-            end: 'top top',
-            scrub: true,
-          },
-        });
+          // Scale down + blur as next card scrolls over
+          gsap.to(card, {
+            scale: 0.88,
+            filter: 'blur(4px) brightness(0.4)',
+            scrollTrigger: {
+              trigger: cards[i + 1],
+              start: 'top bottom',
+              end: 'top top',
+              scrub: true,
+            },
+          });
+        }
       });
-    }, section);
+    }, scroller);
 
     return () => ctx.revert();
   }, []);
 
   return (
     <section className="wwd-section" ref={sectionRef}>
-      {/* Header */}
+      {/* Section Header */}
       <div className="wwd-header">
-        <span className="wwd-label">What We Deliver</span>
-        <h2 className="wwd-heading">
-          HOW WE DRIVE<br />YOUR GROWTH?
-        </h2>
+        <div className="wwd-header-inner">
+          <span className="wwd-label">What We Deliver</span>
+          <h2 className="wwd-heading">
+            HOW WE DRIVE<br />YOUR GROWTH?
+          </h2>
+        </div>
         {/* Spinning badge */}
         <div className="wwd-badge">
           <svg viewBox="0 0 100 100" className="wwd-badge-svg">
@@ -112,49 +114,47 @@ const WhatWeDeliver = () => {
         </div>
       </div>
 
-      {/* Dot navigation */}
-      <div className="wwd-dots">
-        {deliverables.map((_, i) => (
-          <div key={i} className={`wwd-dot ${i === 0 ? 'wwd-dot--active' : ''}`} />
-        ))}
-      </div>
+      {/* Stacking Cards Scroller */}
+      <div className="wwd-scroller" ref={scrollerRef}>
+        <div className="wwd-scroller-inner">
+          {deliverables.map((item, index) => (
+            <div
+              key={index}
+              className={`wwd-card wwd-card--${index % 3 === 0 ? 'dark' : index % 3 === 1 ? 'accent' : 'light'}`}
+              ref={(el) => (cardRefs.current[index] = el)}
+            >
+              {/* Dark overlay element for stacking effect */}
+              <div className="wwd-card-overlay" />
 
-      {/* Stacked panels */}
-      <div className="wwd-panels" ref={panelsContainerRef}>
-        {deliverables.map((item, index) => (
-          <div
-            key={index}
-            className={`wwd-panel wwd-panel--${item.theme}`}
-            ref={(el) => (panelRefs.current[index] = el)}
-          >
-            {/* Vertical grid lines */}
-            <div className="wwd-grid-lines">
-              {[...Array(8)].map((_, i) => (
-                <div key={i} className="wwd-grid-line" />
-              ))}
-            </div>
+              <div className="wwd-card-content">
+                {/* Top bar with number and label */}
+                <div className="wwd-card-topbar">
+                  <span className="wwd-card-number">{item.number}</span>
+                  <span className="wwd-card-label">What We Deliver</span>
+                </div>
 
-            <div className="wwd-panel-inner">
-              {/* Left: Title */}
-              <div className="wwd-panel-left">
-                <h3 className="wwd-panel-title">{item.title}</h3>
-              </div>
-
-              {/* Center: Description */}
-              <div className="wwd-panel-center">
-                <p className="wwd-panel-desc">{item.desc}</p>
-                <a href="#" className="wwd-panel-link">
-                  {item.link} <span className="wwd-link-arrow">↗</span>
-                </a>
-              </div>
-
-              {/* Right: Ghost Number */}
-              <div className="wwd-panel-right">
-                <span className="wwd-panel-number">{item.number}</span>
+                {/* Main content */}
+                <div className="wwd-card-body">
+                  <h3 className="wwd-card-title">{item.title}</h3>
+                  <div className="wwd-card-meta">
+                    <p className="wwd-card-desc">{item.desc}</p>
+                    <a href={item.linkHref} className="wwd-card-link">
+                      {item.link}
+                      <span className="wwd-card-link-arrow">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="7" y1="17" x2="17" y2="7" />
+                          <polyline points="7 7 17 7 17 17" />
+                        </svg>
+                      </span>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        {/* End trigger for pin calculation */}
+        <div className="wwd-end" ref={endRef} />
       </div>
     </section>
   );
