@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Check, ArrowRight, Compass, Target, Cpu, TrendingUp, Sparkles, Award, ShieldAlert, BarChart3, Users } from 'lucide-react';
+import { Check, ArrowRight, Compass, Target, Cpu, TrendingUp, Sparkles, Award, ShieldAlert, BarChart3, Users, Phone } from 'lucide-react';
 
 const allServices = [
   {
@@ -15,7 +15,6 @@ const allServices = [
       'Email outreach campaigns',
       'High-intent lead scoring'
     ],
-    pricing: 'From $499 / mo',
     color: '#10B981', // emerald
     href: '/contact'
   },
@@ -30,7 +29,6 @@ const allServices = [
       'Bid management & audit',
       'Conversions & CPA tracking'
     ],
-    pricing: 'From $799 / mo',
     color: '#F97316', // orange
     href: '/contact'
   },
@@ -45,7 +43,6 @@ const allServices = [
       'High-quality link building',
       'AI Search Engines optimization'
     ],
-    pricing: 'From $599 / mo',
     color: '#0EA5E9', // sky
     href: '/contact'
   },
@@ -60,7 +57,6 @@ const allServices = [
       'High-engagement video reels',
       'Community & inbox monitoring'
     ],
-    pricing: 'From $399 / mo',
     color: '#EC4899', // pink
     href: '/contact'
   },
@@ -75,7 +71,6 @@ const allServices = [
       'Negative result mitigation',
       'Positive brand asset building'
     ],
-    pricing: 'From $299 / mo',
     color: '#F59E0B', // amber
     href: '/contact'
   },
@@ -90,7 +85,6 @@ const allServices = [
       'SEO-first semantic structure',
       'UI/UX conversion rate optimization'
     ],
-    pricing: 'From $1,499 / project',
     color: '#7C3AED', // violet
     href: '/contact'
   },
@@ -105,7 +99,6 @@ const allServices = [
       'App Store Optimization (ASO)',
       'Secure API & CRM integration'
     ],
-    pricing: 'From $2,499 / project',
     color: '#06B6D4', // cyan
     href: '/contact'
   },
@@ -120,7 +113,6 @@ const allServices = [
       'Ad creative testing & templates',
       'Custom & lookalike targeting'
     ],
-    pricing: 'From $599 / mo',
     color: '#3B82F6', // blue
     href: '/contact'
   },
@@ -135,7 +127,6 @@ const allServices = [
       'Storefront & A+ content styling',
       'FBA seller account management'
     ],
-    pricing: 'From $799 / mo',
     color: '#F59E0B', // amber
     href: '/contact'
   },
@@ -150,7 +141,6 @@ const allServices = [
       'High-quality social templates',
       'Print & banner asset layouts'
     ],
-    pricing: 'From $299 / project',
     color: '#EF4444', // red
     href: '/contact'
   },
@@ -165,7 +155,6 @@ const allServices = [
       'Deals & coupons setup management',
       'Performance audit & analytics'
     ],
-    pricing: 'From $499 / mo',
     color: '#F43F5E', // rose
     href: '/contact'
   },
@@ -180,7 +169,6 @@ const allServices = [
       'Sound design & color grading',
       'Dynamic captions & animations'
     ],
-    pricing: 'From $399 / project',
     color: '#8B5CF6', // purple
     href: '/contact'
   }
@@ -229,6 +217,26 @@ const stats = [
 ];
 
 const Services = () => {
+  // Rocket scroll animation for desktop process section
+  const rocketTrackRef = useRef(null);
+  const [rocketProgress, setRocketProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!rocketTrackRef.current) return;
+      const rect = rocketTrackRef.current.getBoundingClientRect();
+      const windowH = window.innerHeight;
+      // Start animating when the track enters the viewport, finish when it leaves
+      const start = windowH;  // track top hits bottom of viewport
+      const end = -rect.height; // track bottom leaves top of viewport
+      const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - end)));
+      setRocketProgress(progress);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="bg-[#050507] text-white min-h-screen pt-28 pb-20 relative overflow-hidden font-sans">
       {/* Import Serif web font inline */}
@@ -343,18 +351,8 @@ const Services = () => {
                   </ul>
                 </div>
 
-                {/* Right Side: Pricing & CTA block */}
+                {/* Right Side: CTA block */}
                 <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col items-stretch sm:items-center lg:items-end justify-between lg:justify-start gap-6 border-t lg:border-t-0 lg:border-l border-white/5 pt-6 lg:pt-0 lg:pl-8 min-w-[200px]">
-                  
-                  {/* Price info */}
-                  <div className="lg:text-right">
-                    <p className="text-[0.62rem] font-black tracking-[0.3em] uppercase text-white/30 mb-1">
-                      INVESTMENT
-                    </p>
-                    <p className="text-white font-bold text-lg md:text-xl">
-                      {service.pricing}
-                    </p>
-                  </div>
 
                   {/* Action buttons */}
                   <div className="flex flex-col gap-3 w-full sm:max-w-xs lg:w-full">
@@ -369,17 +367,17 @@ const Services = () => {
                     >
                       Get Started →
                     </Link>
-                    <Link
-                      to="/contact"
-                      className="w-full text-center px-6 py-3 rounded-full font-black text-[10px] uppercase tracking-wider transition-all duration-300 border hover:scale-105"
+                    <a
+                      href="tel:+919876543210"
+                      className="w-full text-center inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-black text-[10px] uppercase tracking-wider transition-all duration-300 border hover:scale-105"
                       style={{ 
                         borderColor: `${service.color}40`,
                         color: service.color,
                         backgroundColor: `${service.color}08`
                       }}
                     >
-                      Enquire Now
-                    </Link>
+                      <Phone className="w-3.5 h-3.5" /> Call Now
+                    </a>
                   </div>
 
                 </div>
@@ -454,9 +452,75 @@ const Services = () => {
             ))}
           </div>
 
-          {/* SVG Connector Track for desktop layout */}
-          <div className="hidden lg:block absolute top-[280px] left-0 right-0 h-[1.5px] bg-white/[0.03] -z-0 pointer-events-none">
-            <div className="h-full bg-gradient-to-r from-purple-500 via-sky-500 to-lime-400 w-full opacity-30" />
+          {/* Rocket animation track for desktop */}
+          <div ref={rocketTrackRef} className="hidden lg:flex absolute top-[280px] left-0 right-0 h-20 items-center pointer-events-none z-20">
+            {/* Wavy SVG path track */}
+            <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="absolute inset-0 w-full h-full">
+              <path
+                d="M 50 40 Q 200 -20 350 40 T 650 40 T 950 40 T 1150 40"
+                fill="none"
+                stroke="white"
+                strokeWidth="1.5"
+                strokeOpacity="0.06"
+                strokeDasharray="6 8"
+              />
+              {/* Color dots at 4 step positions */}
+              <circle cx="150" cy="40" r="5" fill="#A78BFA" />
+              <circle cx="450" cy="40" r="5" fill="#38BDF8" />
+              <circle cx="750" cy="40" r="5" fill="#34D399" />
+              <circle cx="1050" cy="40" r="5" fill="#BFFF00" />
+            </svg>
+
+            {/* Animated Rocket that moves along the path on scroll */}
+            <div
+              className="absolute top-1/2 -translate-y-1/2 transition-none"
+              style={{
+                left: `${rocketProgress * 92 + 2}%`,
+                filter: 'drop-shadow(0 4px 14px rgba(74, 222, 128, 0.5))'
+              }}
+            >
+              <svg width="52" height="52" viewBox="0 0 56 56" fill="none" className="-rotate-90">
+                <defs>
+                  <linearGradient id="rocket-body" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#475569" />
+                    <stop offset="25%" stopColor="#F8FAFC" />
+                    <stop offset="55%" stopColor="#CBD5E1" />
+                    <stop offset="80%" stopColor="#475569" />
+                    <stop offset="100%" stopColor="#0F172A" />
+                  </linearGradient>
+                  <radialGradient id="rocket-window" cx="35%" cy="30%" r="80%">
+                    <stop offset="0%" stopColor="#7dd3fc" />
+                    <stop offset="50%" stopColor="#0284c7" />
+                    <stop offset="100%" stopColor="#082031" />
+                  </radialGradient>
+                </defs>
+                {/* Body */}
+                <ellipse cx="28" cy="28" rx="9" ry="16" fill="url(#rocket-body)" />
+                {/* Nose cone */}
+                <path d="M28 6 L37 24 L19 24 Z" fill="url(#rocket-body)" />
+                <circle cx="28" cy="6" r="2" fill="#4ade80" />
+                {/* Window */}
+                <circle cx="28" cy="24" r="5" fill="url(#rocket-window)" />
+                <circle cx="28" cy="24" r="5" fill="none" stroke="#cbd5e1" strokeWidth="1" />
+                <ellipse cx="26" cy="22" rx="1.6" ry="1" fill="rgba(255,255,255,0.7)" />
+                {/* Ring */}
+                <rect x="19" y="34" width="18" height="1.5" fill="#4ade80" />
+                {/* Fins */}
+                <path d="M19 38 L13 46 L19 42 Z" fill="url(#rocket-body)" />
+                <path d="M37 38 L43 46 L37 42 Z" fill="url(#rocket-body)" />
+                {/* Nozzle */}
+                <rect x="24" y="42" width="8" height="4" rx="1.5" fill="#334155" />
+                {/* Flame outer */}
+                <ellipse cx="28" cy="50" rx="5" ry="7" fill="#F97316" opacity="0.85">
+                  <animate attributeName="ry" values="7;9;7" dur="0.4s" repeatCount="indefinite" />
+                </ellipse>
+                {/* Flame inner */}
+                <ellipse cx="28" cy="50" rx="3" ry="5" fill="#FBBF24">
+                  <animate attributeName="ry" values="5;7;5" dur="0.4s" repeatCount="indefinite" />
+                </ellipse>
+                <ellipse cx="28" cy="51" rx="1.5" ry="3" fill="white" />
+              </svg>
+            </div>
           </div>
         </section>
 
