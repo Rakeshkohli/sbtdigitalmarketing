@@ -240,7 +240,8 @@ const Services = () => {
   return (
     <div className="bg-[#050507] text-white min-h-screen pt-28 pb-20 relative overflow-hidden font-sans">
       {/* Import Serif web font inline */}
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,300;1,9..144,400;1,9..144,700&display=swap');
         .font-fraunces {
           font-family: 'Fraunces', serif;
@@ -253,7 +254,7 @@ const Services = () => {
       <div className="absolute bottom-[10%] left-[20%] w-[600px] h-[600px] rounded-full bg-purple-600/5 blur-[150px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        
+
         {/* HERO SECTION */}
         <section className="relative pt-12 pb-24 text-center">
           {/* Outlined backdrop word */}
@@ -263,7 +264,7 @@ const Services = () => {
             </span>
           </div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -282,8 +283,8 @@ const Services = () => {
               Everything you need to acquire customers, amplify traffic, and grow your brand — styled to perform and engineered to convert.
             </p>
             <div>
-              <Link 
-                to="/contact" 
+              <Link
+                to="/contact"
                 className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-black font-black rounded-full uppercase tracking-wider hover:bg-white hover:scale-105 transition-all duration-300 shadow-[0_0_40px_rgba(74,222,128,0.25)] hover:shadow-[0_0_50px_rgba(255,255,255,0.4)]"
               >
                 Get a Free Audit <ArrowRight className="w-5 h-5 text-black" />
@@ -307,13 +308,13 @@ const Services = () => {
               }}
             >
               <div className="p-8 md:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                
+
                 {/* Left Side: Details & features */}
                 <div className="lg:col-span-8 space-y-6">
                   <div className="flex items-start gap-4">
-                    <span 
+                    <span
                       className="text-4xl md:text-5xl font-black leading-none tabular-nums select-none opacity-50"
-                      style={{ 
+                      style={{
                         WebkitTextStroke: `1.5px ${service.color}`,
                         color: 'transparent'
                       }}
@@ -321,7 +322,7 @@ const Services = () => {
                       {service.id}
                     </span>
                     <div className="space-y-1">
-                      <p 
+                      <p
                         className="text-[0.65rem] md:text-xs font-black tracking-[0.35em] uppercase"
                         style={{ color: service.color }}
                       >
@@ -341,7 +342,7 @@ const Services = () => {
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 pt-2">
                     {service.features.map((feature, fIndex) => (
                       <li key={fIndex} className="flex items-center gap-3 text-sm text-white/70">
-                        <span 
+                        <span
                           className="w-2 h-2 rounded-full flex-shrink-0"
                           style={{ backgroundColor: service.color, boxShadow: `0 0 10px ${service.color}` }}
                         />
@@ -359,8 +360,8 @@ const Services = () => {
                     <Link
                       to={service.href}
                       className="w-full text-center px-6 py-3.5 rounded-full font-black text-xs uppercase tracking-wider transition-all duration-300 hover:scale-105"
-                      style={{ 
-                        backgroundColor: service.color, 
+                      style={{
+                        backgroundColor: service.color,
                         color: '#000',
                         boxShadow: `0 0 25px ${service.color}35`
                       }}
@@ -370,7 +371,7 @@ const Services = () => {
                     <a
                       href="tel:+919876543210"
                       className="w-full text-center inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-black text-[10px] uppercase tracking-wider transition-all duration-300 border hover:scale-105"
-                      style={{ 
+                      style={{
                         borderColor: `${service.color}40`,
                         color: service.color,
                         backgroundColor: `${service.color}08`
@@ -417,8 +418,8 @@ const Services = () => {
                 className="group relative p-8 rounded-3xl bg-[#0c0c0e] border border-white/[0.04] hover:-translate-y-2 hover:border-white/[0.1] hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)] transition-all duration-500 overflow-hidden"
               >
                 {/* Decorative step color background glow */}
-                <div 
-                  className="absolute -top-16 -right-16 w-32 h-32 rounded-full opacity-0 group-hover:opacity-10 blur-2xl transition-opacity duration-500 pointer-events-none" 
+                <div
+                  className="absolute -top-16 -right-16 w-32 h-32 rounded-full opacity-0 group-hover:opacity-10 blur-2xl transition-opacity duration-500 pointer-events-none"
                   style={{ backgroundColor: step.color }}
                 />
 
@@ -426,7 +427,7 @@ const Services = () => {
                   <div className="p-3 bg-white/[0.03] border border-white/5 rounded-2xl">
                     {step.icon}
                   </div>
-                  <span 
+                  <span
                     className="text-4xl font-black opacity-25 select-none"
                     style={{ WebkitTextStroke: `1px ${step.color}`, color: 'transparent' }}
                   >
@@ -434,7 +435,7 @@ const Services = () => {
                   </span>
                 </div>
 
-                <p 
+                <p
                   className="text-[0.65rem] font-black tracking-[0.25em] uppercase mb-2"
                   style={{ color: step.color }}
                 >
@@ -442,10 +443,10 @@ const Services = () => {
                 </p>
                 <h3 className="text-white font-black text-xl mb-3 leading-tight">{step.title}</h3>
                 <p className="text-white/50 text-xs md:text-sm leading-relaxed">{step.desc}</p>
-                
+
                 {/* Accent bottom border highlight */}
-                <div 
-                  className="absolute bottom-0 left-0 right-0 h-[2px] origin-left transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" 
+                <div
+                  className="absolute bottom-0 left-0 right-0 h-[2px] origin-left transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
                   style={{ background: `linear-gradient(90deg, transparent, ${step.color}, transparent)` }}
                 />
               </motion.div>
@@ -455,7 +456,7 @@ const Services = () => {
           {/* Rocket animation track for desktop */}
           <div ref={rocketTrackRef} className="hidden lg:flex absolute top-[280px] left-0 right-0 h-20 items-center pointer-events-none z-20">
             {/* Wavy SVG path track */}
-            <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="absolute inset-0 w-full h-full">
+            {/* <svg viewBox="0 0 1200 80" preserveAspectRatio="none" className="absolute inset-0 w-full h-full">
               <path
                 d="M 50 40 Q 200 -20 350 40 T 650 40 T 950 40 T 1150 40"
                 fill="none"
@@ -464,11 +465,17 @@ const Services = () => {
                 strokeOpacity="0.06"
                 strokeDasharray="6 8"
               />
-              {/* Color dots at 4 step positions */}
               <circle cx="150" cy="40" r="5" fill="#A78BFA" />
               <circle cx="450" cy="40" r="5" fill="#38BDF8" />
               <circle cx="750" cy="40" r="5" fill="#34D399" />
               <circle cx="1050" cy="40" r="5" fill="#BFFF00" />
+            </svg> */}
+            <svg viewBox="0 0 1200 80" preserveAspectRatio="none" class="absolute inset-0 w-full h-full">
+              <line x1="50" y1="40" x2="1150" y2="40" fill="none" stroke="white" stroke-width="1.5" stroke-opacity="1" stroke-dasharray="6 8"></line>
+              <circle cx="150" cy="40" r="5" fill="#A78BFA"></circle>
+              <circle cx="450" cy="40" r="5" fill="#38BDF8"></circle>
+              <circle cx="750" cy="40" r="5" fill="#34D399"></circle>
+              <circle cx="1050" cy="40" r="5" fill="#BFFF00"></circle>
             </svg>
 
             {/* Animated Rocket that moves along the path on scroll */}
@@ -479,7 +486,7 @@ const Services = () => {
                 filter: 'drop-shadow(0 4px 14px rgba(74, 222, 128, 0.5))'
               }}
             >
-              <svg width="52" height="52" viewBox="0 0 56 56" fill="none" className="-rotate-90">
+              <svg width="52" height="52" viewBox="0 0 56 56" fill="none" className="rotate-90">
                 <defs>
                   <linearGradient id="rocket-body" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stopColor="#475569" />
@@ -536,7 +543,7 @@ const Services = () => {
                 transition={{ duration: 0.5, delay: statIndex * 0.05 }}
                 className="p-6 md:p-8 rounded-3xl bg-white/[0.01] border border-white/[0.03] text-center"
               >
-                <p 
+                <p
                   className="text-3xl md:text-5xl font-black tracking-tight mb-2"
                   style={{ color: stat.color }}
                 >

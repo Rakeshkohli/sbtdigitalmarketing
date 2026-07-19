@@ -21,7 +21,7 @@ const services = [
     subtitle: '( every rupee optimized )',
     desc: 'High ROI PPC campaigns precisely targeting users with intent to buy. Every rupee of your budget is optimized for maximum conversion, delivering measurable returns at scale.',
     link: 'Learn more',
-    img: 'https://images.unsplash.com/photo-1542744094-24638ea0b3b5?auto=format&fit=crop&q=80&w=1200',
+    img: './google-ads.webp',
   },
   {
     id: 3,
@@ -41,7 +41,7 @@ const services = [
   },
   {
     id: 5,
-    title: 'Web Dev',
+    title: 'Web Development',
     subtitle: '( built for performance )',
     desc: 'Modern, fast, and high-converting websites built for performance and user experience — your digital storefront designed to impress, convert, and scale with your business.',
     link: 'Learn more',
@@ -49,7 +49,7 @@ const services = [
   },
   {
     id: 6,
-    title: 'Video',
+    title: 'Video Editing',
     subtitle: '( stories that sell )',
     desc: 'Captivating visual stories that boost engagement and stop the scroll. From reels to brand films, we craft videos that leave a lasting impression and drive action.',
     link: 'Learn more',
@@ -140,7 +140,7 @@ const OurServices = () => {
       <div className="os-header">
         <span className="os-header-label">Services</span>
         <h2 className="os-header-heading">
-          WHAT YOU<br />GET
+          WHAT YOU GET
         </h2>
       </div>
 
